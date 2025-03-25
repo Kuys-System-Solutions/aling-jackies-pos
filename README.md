@@ -7,6 +7,7 @@
 - create a virtual environment with `python -m venv .venv`
 - activate the virtual environment with `source .venv/bin/activate` (`.venv/Scripts/activate` for Windows)
 - install dependencies with `pip install -r requirements.txt`
+- initialize database with `python db.py` (incidentally, you can wipe the database with `python db.py wipe`)
 - run Flask server with `python app.py`
 
 2. In `client`:
