@@ -17,10 +17,10 @@
 
 ### Guide
 
-Both servers need to be active at the same time for the application to function as a whole.
+Both servers need to be active at the same time for the application to function as a whole. However, frontend and backend development can be done separately (theoretically). Dummy data can be used temporarily for frontend development, while backend development can be done with API tools like REST Client.
 
-The frontend and backend communicate using an API whose endpoints are defined in `app.py`. Ideally, this API should be as REST-like as possible (statelessness, use of appropriate HTTP methods like PUT/PATCH for updates, DELETE for deletions, POST for additions, etc.).
+The frontend and backend communicate with JSON using an API whose endpoints are defined in `app.py`. Ideally, this API should be as REST-like as possible (statelessness, use of appropriate HTTP methods like PUT/PATCH for updates, DELETE for deletions, POST for additions, etc.).
 
-Refer to `./server/testing.http` for API endpoint testing. Use tools like cURL, Postman, or REST Client (recommended) to test non-GET HTTP methods.
+Refer to `./server/testing.http` for API endpoint testing. Use API tools like cURL, Postman, or REST Client (recommended) to test non-GET HTTP methods.
 
 Refer to `./client/src/App.jsx` to see app routes. Routing between pages hasn't been implemented yet.
