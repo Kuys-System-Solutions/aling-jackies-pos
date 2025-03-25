@@ -2,10 +2,10 @@ import { useState, useEffect } from 'react';
 import '../../../App.css';
 
 export default function OrderView() {
-  const [data, setData] = useState(undefined);
+  const [data, setData] = useState([{}]);
 
   useEffect(() => {
-    fetch('/api')
+    fetch('/api/items')
       .then((res) => res.json())
       .then((data) => {
         setData(data);
@@ -22,7 +22,13 @@ export default function OrderView() {
         {typeof data === 'undefined' ? (
           <p>Loading...</p>
         ) : (
-          <p>{data.message}</p>
+          <ul>
+            {data.map((item, index) => (
+              <li key={index}>
+                {item.item_name} - {item.price} - {item.image_path}
+              </li>
+            ))}
+          </ul>
         )}
       </div>
     </>

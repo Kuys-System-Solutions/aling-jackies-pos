@@ -1,0 +1,43 @@
+// Add item
+POST http://localhost:5000/api/items HTTP/1.1
+content-type: application/json
+
+// Test payload from a test POST request.
+{
+    "item_name": "Cheesedog",
+    "item_price": "1000",
+    "item_image": "/path/to/image"
+}
+
+###
+
+// Get all items
+GET http://localhost:5000/api/items HTTP/1.1
+content-type: application/json
+
+###
+
+// Get specific item
+GET http://localhost:5000/api/items/10 HTTP/1.1
+content-type: application/json
+
+###
+
+// Update specific item
+PATCH http://localhost:5000/api/items/10 HTTP/1.1
+content-type: application/json
+
+{
+    "item_name": "Hatdog Hatdog Hatdiggitydog",
+    "item_price": "10000000",
+    "item_image": "/path/to/images"
+}
+
+###
+
+// Delete item
+DELETE http://localhost:5000/api/items/1 HTTP/1.1
+content-type: application/json
+
+###
+
