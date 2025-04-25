@@ -4,19 +4,14 @@ import { Routes, Route } from 'react-router';
 import OrderView from './components/pages/OrderView';
 import PendingOrders from './components/pages/PendingOrders';
 import OrderHistory from './components/pages/OrderHistory';
-import CRUD from './components/pages/CRUD';
 
 function App() {
   return (
     <Routes>
       <Route path="/" element={<Index />} />
-      <Route path="/pos" element={<HomePOS />} />
-      <Route path="/pos/order-now" element={<OrderView />} />
-      <Route path="/pos/current-orders/:id" element={<PendingOrders />} />
-      <Route path="/admin" element={<Admin />} />
-      <Route path="/admin/order-history" element={<OrderHistory />} />
-      <Route path="/admin/crud" element={<CRUD />} />
-      <Route path="/admin/inventory" element={<Inventory />} />
+      <Route path="/order-now" element={<OrderView />} />
+      <Route path="/current-orders/:id" element={<PendingOrders />} />
+      <Route path="/order-history" element={<OrderHistory />} />
     </Routes>
   );
 }
@@ -42,24 +37,12 @@ function Index() {
         <p>...and {data.message}</p>
       )}
 
-      <p>You seem a little lost...</p>
+      <p>This is where we add the Dine In/Take Out options.</p>
       <p>
-        Try going to the <a href="secret">POS</a> or <a href="secret">Admin</a>{' '}
-        page.
+        Try going to the <a href="/order-now">POS</a> page.
       </p>
     </>
   );
-}
-
-// placeholders
-function Admin() {
-  return <div>Admin Page</div>;
-}
-function HomePOS() {
-  return <div>Admin Page</div>;
-}
-function Inventory() {
-  return <div>Admin Page</div>;
 }
 
 export default App;
