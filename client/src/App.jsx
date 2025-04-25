@@ -1,9 +1,9 @@
 import { useState, useEffect } from 'react';
 import './App.css';
 import { Routes, Route } from 'react-router';
-import OrderView from './components/pages/OrderView';
-import PendingOrders from './components/pages/PendingOrders';
-import OrderHistory from './components/pages/OrderHistory';
+import OrderView from './pages/OrderView';
+import PendingOrders from './pages/PendingOrders';
+import OrderHistory from './pages/OrderHistory';
 
 function App() {
   return (
