@@ -4,9 +4,9 @@ content-type: application/json
 
 // Test payload from a test POST request.
 {
-    "item_name": "Cheesedog",
-    "item_price": "1000",
-    "item_image": "/path/to/image"
+    "name": "Cheesedog",
+    "price": "1000",
+    "image": "/path/to/image",
 }
 
 ###

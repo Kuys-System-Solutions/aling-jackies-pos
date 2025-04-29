@@ -1,8 +1,8 @@
 # server/controller/menu_item_controller.py
 from flask import request, jsonify, Blueprint
 import logging
-from ..models.menu_item_model import MenuItem
-from ..repository.menu_item_repository import MenuItemRepository
+from ..models.item_model import MenuItem
+from ..repository.item_repository import MenuItemRepository
 
 # Configure controller logger
 logger = logging.getLogger(__name__)

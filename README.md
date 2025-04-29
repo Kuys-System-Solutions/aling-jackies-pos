@@ -2,15 +2,15 @@
 
 ### Setup
 
-1. In `server`:
+1. In `server` (no need to `cd` into the directory):
 
 - create a virtual environment with `python -m venv .venv`
 - activate the virtual environment with `source .venv/bin/activate` (`.venv/Scripts/activate` for Windows)
 - install dependencies with `pip install -r requirements.txt`
-- initialize database with `python db.py` (incidentally, you can wipe the database with `python db.py wipe`)
-- run Flask server with `python app.py`
+- initialize database with `python -m server.init_db` (incidentally, you can wipe the database with `python -m server.wipe_db`)
+- run Flask server with `python -m server.app`
 
-2. In `client`:
+2. In `client` (remember to run `cd client` first):
 
 - install dependencies with `npm i`
 - run server with `npm run dev`
