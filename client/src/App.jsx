@@ -1,10 +1,12 @@
+// src/App.jsx
 import { useState, useEffect } from 'react';
 import './App.css';
 import { Routes, Route } from 'react-router';
 import OrderView from './pages/OrderView';
 import PendingOrders from './pages/PendingOrders';
 import OrderHistory from './pages/OrderHistory';
-import KitchenView from './pages/KitchenView';  // Add this import
+import KitchenView from './pages/KitchenView';
+import StudioView from './pages/StudioView';  // Add this import
 
 
 function App() {
@@ -15,6 +17,7 @@ function App() {
       <Route path="/current-orders/:id" element={<PendingOrders />} />
       <Route path="/order-history" element={<OrderHistory />} />
       <Route path="/kitchen" element={<KitchenView />} />
+      <Route path="/studio" element={<StudioView />} />  {/* Add this new route */}
     </Routes>
   );
 }
@@ -42,7 +45,7 @@ function Index() {
 
       <p>This is where we add the Dine In/Take Out options.</p>
       <p>
-        Try going to the <a href="/order-now">POS</a> page.
+        Try going to the <a href="/order-now">POS</a> page, <a href="/kitchen">Kitchen View</a> (dine-in orders), or <a href="/studio">Studio View</a> (take-out orders).
       </p>
     </>
   );

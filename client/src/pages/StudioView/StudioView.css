@@ -1,0 +1,155 @@
+/* src/pages/StudioView/StudioView.css */
+/* This is identical to KitchenView.css */
+.studio-view-wrapper {
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  width: 100%;
+  overflow: hidden;
+}
+
+.main-content {
+  flex: 1;
+  overflow-y: auto;
+  padding: 20px;
+  background-color: #f5f5f5;
+}
+
+.orders-container {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(330px, 1fr));
+  gap: 16px;
+  max-width: 1400px;
+  margin: 0 auto;
+}
+
+.order-card {
+  background-color: white;
+  border-radius: 10px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  overflow: hidden;
+  height: fit-content;
+  transition: transform 0.2s ease;
+}
+
+.order-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+}
+
+/* Color coding for different order types */
+.order-card.dinein .order-header {
+  background-color: #f9d3e4; /* Pink for dine-in */
+}
+
+.order-card.takeout .order-header {
+  background-color: #a9a9ff; /* Blue for take-out */
+}
+
+.order-header {
+  display: flex;
+  justify-content: space-between;
+  padding: 12px 15px;
+}
+
+.order-info {
+  display: flex;
+  flex-direction: column;
+}
+
+.order-id {
+  font-weight: bold;
+  font-size: 18px;
+}
+
+.order-time {
+  font-size: 16px;
+}
+
+.customer-info {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+}
+
+.customer-name {
+  font-size: 18px;
+  font-weight: bold;
+}
+
+.order-type {
+  font-size: 16px;
+}
+
+.order-items {
+  padding: 15px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.item {
+  display: flex;
+  margin-bottom: 5px;
+}
+
+.item-quantity {
+  font-weight: bold;
+  margin-right: 10px;
+  min-width: 30px;
+}
+
+.item-name {
+  font-weight: bold;
+  display: flex;
+  flex-direction: column;
+}
+
+.item-details {
+  list-style-type: none;
+  padding: 0;
+  margin: 8px 0 12px 5px;
+}
+
+.item-details li {
+  font-weight: normal;
+  margin-bottom: 5px;
+  font-size: 16px;
+  line-height: 1.4;
+}
+
+/* Media Queries for better responsiveness */
+@media screen and (max-width: 1200px) {
+  .orders-container {
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .orders-container {
+    grid-template-columns: 1fr;
+  }
+  
+  .order-card {
+    max-width: 100%;
+  }
+}
+
+@media screen and (max-width: 480px) {
+  .main-content {
+    padding: 10px;
+  }
+  
+  .order-header {
+    padding: 10px;
+  }
+  
+  .order-id, .customer-name {
+    font-size: 16px;
+  }
+  
+  .order-time, .order-type {
+    font-size: 14px;
+  }
+}

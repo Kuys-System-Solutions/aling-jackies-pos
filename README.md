@@ -11,7 +11,7 @@
 - go to root directory `cd ..`
 - initialize database with `python -m server.init_db` (incidentally, you can wipe the database with `python -m server.wipe_db`)
 - go to the directory of requirements.txt `cd server`
-- run Flask server with `python3 -m app.py`
+- run Flask server with `python3 app.py`
 
 2. In `client` (remember to run `cd client` first):
 
