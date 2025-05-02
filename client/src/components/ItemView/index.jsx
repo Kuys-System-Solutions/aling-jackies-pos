@@ -1,8 +1,4 @@
 import React, { useState } from 'react';
-import { Input, Card, Row, Col, Typography, Tag, Button } from 'antd';
-import { SearchOutlined } from '@ant-design/icons';
-
-const { Text } = Typography;
 
 const menuItems = [
   {
@@ -10,84 +6,84 @@ const menuItems = [
     name: 'Beef Pares w/ Garlic Rice',
     price: 90,
     category: 'Special Menu',
-    image: '/api/placeholder/150/150'
+    image: 'https://phohoangminh.com/img/placeholders/burger_placeholder.png?v=1'
   },
   {
     id: 2,
     name: 'VM #1',
     price: 120,
     category: 'Value Meal',
-    image: '/api/placeholder/150/150'
+    image: 'https://phohoangminh.com/img/placeholders/burger_placeholder.png?v=1'
   },
   {
     id: 3,
     name: 'VM #2',
     price: 120,
     category: 'Value Meal',
-    image: '/api/placeholder/150/150'
+    image: 'https://phohoangminh.com/img/placeholders/burger_placeholder.png?v=1'
   },
   {
     id: 4,
     name: 'VM #3',
     price: 120,
     category: 'Value Meal',
-    image: '/api/placeholder/150/150'
+    image: 'https://phohoangminh.com/img/placeholders/burger_placeholder.png?v=1'
   },
   {
     id: 5,
     name: 'VM #4',
     price: 120,
     category: 'Value Meal',
-    image: '/api/placeholder/150/150'
+    image: 'https://phohoangminh.com/img/placeholders/burger_placeholder.png?v=1'
   },
   {
     id: 6,
     name: 'VM #5',
     price: 120,
     category: 'Value Meal',
-    image: '/api/placeholder/150/150'
+    image: 'https://phohoangminh.com/img/placeholders/burger_placeholder.png?v=1'
   },
   {
     id: 7,
     name: 'VM #6',
     price: 120,
     category: 'Value Meal',
-    image: '/api/placeholder/150/150'
+    image: 'https://phohoangminh.com/img/placeholders/burger_placeholder.png?v=1'
   },
   {
     id: 8,
     name: 'Grilled Liempo',
     price: 120,
     category: 'Sizzling',
-    image: '/api/placeholder/150/150'
+    image: 'https://phohoangminh.com/img/placeholders/burger_placeholder.png?v=1'
   },
   {
     id: 9,
     name: 'Pork Sisig',
     price: 120,
     category: 'Sizzling',
-    image: '/api/placeholder/150/150'
+    image: 'https://phohoangminh.com/img/placeholders/burger_placeholder.png?v=1'
   },
   {
     id: 10,
     name: 'Pork Steak',
     price: 120,
     category: 'Sizzling',
-    image: '/api/placeholder/150/150'
+    image: 'https://phohoangminh.com/img/placeholders/burger_placeholder.png?v=1'
   },
   {
     id: 11,
     name: 'Baked Rosemary Chicken',
     price: 120,
     category: 'Sizzling',
-    image: '/api/placeholder/150/150'
+    image: 'https://phohoangminh.com/img/placeholders/burger_placeholder.png?v=1'
   },
   {
     id: 12,
     name: 'Burger Steak',
     price: 120,
     category: 'Sizzling',
-    image: '/api/placeholder/150/150'
+    image: 'https://phohoangminh.com/img/placeholders/burger_placeholder.png?v=1'
   }
 ];
 
@@ -95,101 +91,142 @@ const categories = ['All', 'Special Menu', 'Value Meal', 'Sizzling', 'Rice Bowls
 
 const ItemView = ({ onSelectItem }) => {
   const [selectedCategory, setSelectedCategory] = useState('All');
+  const [searchTerm, setSearchTerm] = useState('');
 
-  const filteredItems = selectedCategory === 'All' 
-    ? menuItems 
-    : menuItems.filter(item => item.category === selectedCategory);
+  // Filter items based on category and search term
+  const filteredItems = menuItems.filter(item => {
+    const matchesCategory = selectedCategory === 'All' || item.category === selectedCategory;
+    const matchesSearch = item.name.toLowerCase().includes(searchTerm.toLowerCase());
+    return matchesCategory && matchesSearch;
+  });
 
   const handleCategoryClick = (category) => {
     setSelectedCategory(category);
   };
 
-  // Fixed size for menu items regardless of how many are displayed
-  const itemWidth = { xs: 12, sm: 8, md: 6, lg: 6 };
-  
-  // Ensure items don't grow to fill available space
-  const fixedColStyle = { 
-    maxWidth: '25%',  // Ensures 4 items per row
-    width: '25%'      // Explicit width setting
-  };
-
   return (
-    <div style={{ flex: 1, backgroundColor: '#f5f5f5', height: '100vh', overflow: 'hidden', display: 'flex', flexDirection: 'column' }}>
-      {/* Search Bar */}
-      <div style={{ padding: '10px 20px', backgroundColor: '#d694b9', display: 'flex', alignItems: 'center' }}>
-        <Input
-          prefix={<SearchOutlined style={{ color: '#d694b9' }} />}
-          placeholder="Search"
-          style={{ borderRadius: '20px', width: '100%' }}
-        />
-      </div>
+    <div style={{ 
+      backgroundColor: 'white',
+      flex: 1,
+      display: 'flex',
+      flexDirection: 'column',
+      height: '100vh',
+      overflow: 'hidden',
+      marginLeft: '0', // Ensure no left margin
+      position: 'relative'
+    }}>
+    
 
       {/* Category Navigation */}
-      <div style={{ backgroundColor: '#f0d4e4', borderRadius: '15px', margin: '10px', padding: '5px', overflowX: 'auto', whiteSpace: 'nowrap' }}>
+      <div style={{ 
+        backgroundColor: '#f0d4e4', 
+        borderRadius: '15px', 
+        margin: '0 15px 15px 15px', 
+        padding: '5px', 
+        overflowX: 'auto', 
+        whiteSpace: 'nowrap' 
+      }}>
         {categories.map(category => (
-          <Button
+          <button
             key={category}
-            type={selectedCategory === category ? 'primary' : 'text'}
             style={{ 
               margin: '0 5px', 
               borderRadius: '15px',
               backgroundColor: selectedCategory === category ? '#d694b9' : 'transparent',
-              borderColor: selectedCategory === category ? '#d694b9' : 'transparent',
-              color: selectedCategory === category ? 'white' : '#444'
+              border: 'none',
+              padding: '6px 12px',
+              color: selectedCategory === category ? 'white' : '#444',
+              cursor: 'pointer',
+              transition: 'all 0.2s ease'
             }}
             onClick={() => handleCategoryClick(category)}
           >
             {category}
-          </Button>
+          </button>
         ))}
       </div>
 
       {/* Menu Items Grid */}
-      <div style={{ flex: 1, padding: '10px', overflowY: 'auto' }}>
-        <Row gutter={[16, 16]} style={{ width: '100%' }}>
+      <div style={{ 
+        flex: 1, 
+        padding: '0 15px 15px 15px', 
+        overflowY: 'auto',
+        backgroundColor: 'white'
+      }}>
+        <div style={{ 
+          display: 'grid',
+          gridTemplateColumns: 'repeat(4, 1fr)',
+          gap: '15px'
+        }}>
           {filteredItems.map(item => (
-            <Col 
-              key={item.id} 
-              {...itemWidth}
-              style={fixedColStyle}
+            <div 
+              key={item.id}
+              style={{ 
+                backgroundColor: 'white',
+                border: '1px solid #eee',
+                borderRadius: '8px',
+                overflow: 'hidden',
+                cursor: 'pointer',
+                boxShadow: '0 2px 4px rgba(0,0,0,0.05)'
+              }}
+              onClick={() => onSelectItem && onSelectItem(item)}
             >
-              <Card
-                hoverable
-                style={{ 
-                  width: '100%',
-                  borderRadius: '10px', 
-                  overflow: 'hidden' 
-                }}
-                cover={
-                  <div style={{ height: '150px', overflow: 'hidden', position: 'relative' }}>
-                    <img
-                      alt={item.name}
-                      src={item.image}
-                      style={{ width: '100%', height: '100%', objectFit: 'cover' }}
-                    />
-                    <Tag color="#d694b9" style={{ position: 'absolute', top: '10px', left: '10px' }}>
-                      {item.category}
-                    </Tag>
-                  </div>
-                }
-                bodyStyle={{ padding: '10px' }}
-                onClick={() => onSelectItem(item)}
-              >
-                <div style={{ textAlign: 'center' }}>
-                  <Text strong>{item.name}</Text>
-                  <div>
-                    <Button
-                      type="primary"
-                      style={{ backgroundColor: '#f0d4e4', borderColor: '#f0d4e4', color: '#333', borderRadius: '15px', width: '100%', marginTop: '10px' }}
-                    >
-                      P {item.price}
-                    </Button>
-                  </div>
+              <div style={{ 
+                height: '150px', 
+                overflow: 'hidden', 
+                position: 'relative' 
+              }}>
+                <img
+                  alt={item.name}
+                  src={item.image}
+                  style={{ 
+                    width: '100%', 
+                    height: '100%', 
+                    objectFit: 'cover' 
+                  }}
+                />
+                <span style={{ 
+                  position: 'absolute', 
+                  top: '10px', 
+                  left: '10px',
+                  backgroundColor: '#d694b9',
+                  color: 'white',
+                  padding: '2px 8px',
+                  borderRadius: '4px',
+                  fontSize: '12px'
+                }}>
+                  {item.category}
+                </span>
+              </div>
+              
+              <div style={{ 
+                padding: '10px',
+                textAlign: 'center'
+              }}>
+                <div style={{ 
+                  fontWeight: 'bold',
+                  marginBottom: '10px',
+                  fontSize: '14px'
+                }}>
+                  {item.name}
                 </div>
-              </Card>
-            </Col>
+                <button
+                  style={{ 
+                    backgroundColor: '#f0d4e4', 
+                    border: 'none', 
+                    color: '#333', 
+                    borderRadius: '15px', 
+                    width: '100%', 
+                    padding: '8px 0',
+                    cursor: 'pointer'
+                  }}
+                >
+                  P {item.price}
+                </button>
+              </div>
+            </div>
           ))}
-        </Row>
+        </div>
       </div>
     </div>
   );

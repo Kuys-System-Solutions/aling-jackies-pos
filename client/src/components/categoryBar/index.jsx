@@ -1,5 +1,7 @@
 import React, { useState } from "react";
 import "./index.css";
+import ItemView from "../ItemView";
+
 
 // SVG Icons (custom replacements for Ant Design icons)
 const ShoppingIcon = () => (
@@ -74,6 +76,12 @@ const FoodOrderMenu = () => {
   const handleMenuClick = (key) => {
     setClickedKey(key === clickedKey ? null : key); // Toggle clicked state
   };
+
+  const handleSelectItem = (item) => {
+      // Add your logic to add the item to the order list
+      console.log('Item selected:', item);
+      // You might want to use state management or context here
+    };
   
   return (
     <div style={{ width: "100%", display: "flex" }}>
@@ -124,7 +132,7 @@ const FoodOrderMenu = () => {
       
       {/* Main content area */}
       <div className="main-content">
-        {/* Your content goes here */}
+        <ItemView onSelectItem={handleSelectItem} />
       </div>
     </div>
   );
