@@ -1,9 +1,10 @@
-import React, { useState } from 'react';
-import './KitchenView.css';
+// src/pages/StudioView/index.jsx
+import React, { useState, useEffect } from 'react';
+import './StudioView.css';
 import KitchenHeader from '../../components/KitchenHeader';
 
-const KitchenView = () => {
-  // Sample order data
+const StudioView = () => {
+  // Sample order data - same as KitchenView but will filter for take-out only
   const [orders, setOrders] = useState([
     {
       id: '01293',
@@ -41,7 +42,7 @@ const KitchenView = () => {
       id: '02344',
       orderTime: '11:43:20',
       customerName: 'Malou',
-      orderType: 'Dine-In',
+      orderType: 'Take-out',
       items: [
         { 
           quantity: 1, 
@@ -61,7 +62,7 @@ const KitchenView = () => {
       id: '02465',
       orderTime: '11:52:19',
       customerName: 'Jessie',
-      orderType: 'Dine-In',
+      orderType: 'Take-out',
       items: [
         { quantity: 1, name: 'Chicken Premium Party Tray' },
         { quantity: 1, name: 'Seafood Premium Party Tray' },
@@ -82,7 +83,7 @@ const KitchenView = () => {
       id: '02465',
       orderTime: '11:52:19',
       customerName: 'Raul',
-      orderType: 'Dine-In',
+      orderType: 'Take-out',
       items: [
         { 
           quantity: 1, 
@@ -111,14 +112,17 @@ const KitchenView = () => {
     }
   ]);
 
+  // Filter orders to only show Take-out orders
+  const takeoutOrders = orders.filter(order => order.orderType === 'Take-out');
+
   return (
-    <div className="kitchen-view-wrapper">
+    <div className="studio-view-wrapper">
       <KitchenHeader />
       
       <div className="main-content">
         <div className="orders-container">
-          {orders.map((order, index) => (
-            <div key={index} className={`order-card ${order.orderType === 'Take-out' ? 'takeout' : 'dinein'}`}>
+          {takeoutOrders.map((order, index) => (
+            <div key={index} className="order-card takeout">
               <div className="order-header">
                 <div className="order-info">
                   <div className="order-id">#{order.id}</div>
@@ -156,4 +160,4 @@ const KitchenView = () => {
   );
 };
 
-export default KitchenView;
+export default StudioView;
