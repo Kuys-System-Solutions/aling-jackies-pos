@@ -4,6 +4,8 @@ import { Routes, Route } from 'react-router';
 import OrderView from './pages/OrderView';
 import PendingOrders from './pages/PendingOrders';
 import OrderHistory from './pages/OrderHistory';
+import KitchenView from './pages/KitchenView';  // Add this import
+
 
 function App() {
   return (
@@ -12,6 +14,7 @@ function App() {
       <Route path="/order-now" element={<OrderView />} />
       <Route path="/current-orders/:id" element={<PendingOrders />} />
       <Route path="/order-history" element={<OrderHistory />} />
+      <Route path="/kitchen" element={<KitchenView />} />
     </Routes>
   );
 }
