@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import './KitchenHeader.css';
+import logo from '../../assets/logo.png';
 
 const KitchenHeader = () => {
   // Stats for open and done orders
@@ -40,7 +41,7 @@ const KitchenHeader = () => {
   return (
     <header className="kitchen-header">
       <div className="logo">
-        <img src="/logo.png" alt="Aling Jackie's Logo" />
+        <img src={logo} alt="Aling Jackie's Logo" />
       </div>
       
       <div className="order-counts">
