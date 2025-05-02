@@ -1,186 +1,130 @@
 import React, { useState } from "react";
-import { Menu } from "lucide-react";
-import { Menu as AntMenu } from "antd";
+import "./index.css";
 
-// Icons matching the original design
-const ShoppingOutlined = () => (
-  <svg viewBox="0 0 1024 1024" width="1em" height="1em" fill="currentColor">
-    <path d="M832 312H696v-16c0-101.6-82.4-184-184-184s-184 82.4-184 184v16H192c-17.7 0-32 14.3-32 32v536c0 17.7 14.3 32 32 32h640c17.7 0 32-14.3 32-32V344c0-17.7-14.3-32-32-32zm-432-16c0-61.9 50.1-112 112-112s112 50.1 112 112v16H400v-16zm392 544H232V384h96v88c0 4.4 3.6 8 8 8h56c4.4 0 8-3.6 8-8v-88h224v88c0 4.4 3.6 8 8 8h56c4.4 0 8-3.6 8-8v-88h96v456z" />
+// SVG Icons (custom replacements for Ant Design icons)
+const ShoppingIcon = () => (
+  <svg viewBox="0 0 24 24" width="1em" height="1em" fill="currentColor">
+    <path d="M7 18c-1.1 0-1.99.9-1.99 2S5.9 22 7 22s2-.9 2-2-.9-2-2-2zM1 2v2h2l3.6 7.59-1.35 2.45c-.16.28-.25.61-.25.96 0 1.1.9 2 2 2h12v-2H7.42c-.14 0-.25-.11-.25-.25l.03-.12.9-1.63h7.45c.75 0 1.41-.41 1.75-1.03l3.58-6.49c.08-.14.12-.31.12-.48 0-.55-.45-1-1-1H5.21l-.94-2H1zm16 16c-1.1 0-1.99.9-1.99 2s.89 2 1.99 2 2-.9 2-2-.9-2-2-2z" />
   </svg>
 );
 
-const AppstoreOutlined = () => (
-  <svg viewBox="0 0 1024 1024" width="1em" height="1em" fill="currentColor">
-    <path d="M464 144H160c-8.8 0-16 7.2-16 16v304c0 8.8 7.2 16 16 16h304c8.8 0 16-7.2 16-16V160c0-8.8-7.2-16-16-16zm-52 268H212V212h200v200zm452-268H560c-8.8 0-16 7.2-16 16v304c0 8.8 7.2 16 16 16h304c8.8 0 16-7.2 16-16V160c0-8.8-7.2-16-16-16zm-52 268H612V212h200v200zM464 544H160c-8.8 0-16 7.2-16 16v304c0 8.8 7.2 16 16 16h304c8.8 0 16-7.2 16-16V560c0-8.8-7.2-16-16-16zm-52 268H212V612h200v200zm452-268H560c-8.8 0-16 7.2-16 16v304c0 8.8 7.2 16 16 16h304c8.8 0 16-7.2 16-16V560c0-8.8-7.2-16-16-16zm-52 268H612V612h200v200z" />
+const AppstoreIcon = () => (
+  <svg viewBox="0 0 24 24" width="1em" height="1em" fill="currentColor">
+    <path d="M4 8h4V4H4v4zm6 12h4v-4h-4v4zm-6 0h4v-4H4v4zm0-6h4v-4H4v4zm6 0h4v-4h-4v4zm6-10v4h4V4h-4zm-6 4h4V4h-4v4zm6 6h4v-4h-4v4zm0 6h4v-4h-4v4z" />
   </svg>
 );
 
-const CoffeeOutlined = () => (
-  <svg viewBox="0 0 1024 1024" width="1em" height="1em" fill="currentColor">
-    <path d="M275 281c19.9 0 36-16.1 36-36V36c0-19.9-16.1-36-36-36s-36 16.1-36 36v209c0 19.9 16.1 36 36 36zm613 144H768v-96c0-4.4-3.6-8-8-8h-56c-4.4 0-8 3.6-8 8v96H548v-96c0-4.4-3.6-8-8-8h-56c-4.4 0-8 3.6-8 8v96H348v-96c0-4.4-3.6-8-8-8h-56c-4.4 0-8 3.6-8 8v96H136c-35.3 0-64 28.7-64 64v576c0 35.3 28.7 64 64 64h752c35.3 0 64-28.7 64-64V489c0-35.3-28.7-64-64-64zm0 640H136V489h752v576zM496 281c19.9 0 36-16.1 36-36V36c0-19.9-16.1-36-36-36s-36 16.1-36 36v209c0 19.9 16.1 36 36 36zm-221 0c19.9 0 36-16.1 36-36V36c0-19.9-16.1-36-36-36s-36 16.1-36 36v209c0 19.9 16.1 36 36 36z" />
+const CoffeeIcon = () => (
+  <svg viewBox="0 0 24 24" width="1em" height="1em" fill="currentColor">
+    <path d="M20 3H4v10c0 2.21 1.79 4 4 4h6c2.21 0 4-1.79 4-4v-3h2c1.11 0 2-.89 2-2V5c0-1.11-.89-2-2-2zm0 5h-2V5h2v3zM4 19h16v2H4z" />
   </svg>
 );
 
-const SettingOutlined = () => (
-  <svg viewBox="0 0 1024 1024" width="1em" height="1em" fill="currentColor">
-    <path d="M512.5 390.6c-29.9 0-57.9 11.6-79.1 32.8-21.1 21.2-32.8 49.2-32.8 79.1 0 29.9 11.7 57.9 32.8 79.1 21.2 21.1 49.2 32.8 79.1 32.8 29.9 0 57.9-11.7 79.1-32.8 21.1-21.2 32.8-49.2 32.8-79.1 0-29.9-11.7-57.9-32.8-79.1a110.96 110.96 0 00-79.1-32.8zm412.3 235.5l-65.4-55.9c3.1-19 4.7-38.4 4.7-57.7s-1.6-38.8-4.7-57.7l65.4-55.9a32.03 32.03 0 009.3-35.2l-.9-2.6a442.5 442.5 0 00-79.6-137.7l-1.8-2.1a32.12 32.12 0 00-35.1-9.5l-81.2 28.9c-30-24.6-63.4-44-99.6-57.5l-15.7-84.9a32.05 32.05 0 00-25.8-25.7l-2.7-.5c-52-9.4-106.8-9.4-158.8 0l-2.7.5a32.05 32.05 0 00-25.8 25.7l-15.8 85.3a353.44 353.44 0 00-99 57.1l-81.8-29.1a32 32 0 00-35.1 9.5l-1.8 2.1a445.93 445.93 0 00-79.6 137.7l-.9 2.6c-4.5 12.5-.8 26.5 9.3 35.2l66.2 56.5c-3.1 18.8-4.6 38-4.6 57 0 19.2 1.5 38.4 4.6 57l-66 56.5a32.03 32.03 0 00-9.3 35.2l.9 2.6c18.1 50.3 44.8 96.8 79.6 137.7l1.8 2.1a32.12 32.12 0 0035.1 9.5l81.8-29.1c29.8 24.5 63 43.9 98.9 57.3l15.8 85.3a32.05 32.05 0 0025.8 25.7l2.7.5a448.27 448.27 0 00158.8 0l2.7-.5a32.05 32.05 0 0025.8-25.7l15.7-84.9c36.2-13.6 69.6-32.9 99.6-57.5l81.2 28.9a32 32 0 0035.1-9.5l1.8-2.1c34.8-41.1 61.5-87.4 79.6-137.7l.9-2.6c4.3-12.4.6-26.3-9.5-35zm-412.3 52.2c-97.1 0-175.8-78.7-175.8-175.8s78.7-175.8 175.8-175.8 175.8 78.7 175.8 175.8-78.7 175.8-175.8 175.8z" />
+const SettingsIcon = () => (
+  <svg viewBox="0 0 24 24" width="1em" height="1em" fill="currentColor">
+    <path d="M19.14 12.94c.04-.3.06-.61.06-.94 0-.32-.02-.64-.07-.94l2.03-1.58c.18-.14.23-.41.12-.61l-1.92-3.32c-.12-.22-.37-.29-.59-.22l-2.39.96c-.5-.38-1.03-.7-1.62-.94l-.36-2.54c-.04-.24-.24-.41-.48-.41h-3.84c-.24 0-.43.17-.47.41l-.36 2.54c-.59.24-1.13.57-1.62.94l-2.39-.96c-.22-.08-.47 0-.59.22L2.74 8.87c-.12.21-.08.47.12.61l2.03 1.58c-.05.3-.09.63-.09.94s.02.64.07.94l-2.03 1.58c-.18.14-.23.41-.12.61l1.92 3.32c.12.22.37.29.59.22l2.39-.96c.5.38 1.03.7 1.62.94l.36 2.54c.05.24.24.41.48.41h3.84c.24 0 .44-.17.47-.41l.36-2.54c.59-.24 1.13-.56 1.62-.94l2.39.96c.22.08.47 0 .59-.22l1.92-3.32c.12-.22.07-.47-.12-.61l-2.01-1.58zM12 15.6c-1.98 0-3.6-1.62-3.6-3.6s1.62-3.6 3.6-3.6 3.6 1.62 3.6 3.6-1.62 3.6-3.6 3.6z" />
   </svg>
 );
 
 // Custom Menu Item component that shows text under the icon
-const IconMenuItem = ({ icon, text, isClicked }) => (
-  <div className={`flex flex-col items-center justify-center py-2 w-full transition-colors duration-200 ${isClicked ? 'bg-opacity-15 bg-black' : 'bg-transparent'} rounded-lg`}>
-    {/* Icon container with soft-edged square background */}
-    <div 
-      className={`flex items-center justify-center relative w-12 h-12 rounded-2xl transition-all duration-200 ${
-        isClicked 
-          ? 'bg-white bg-opacity-50 shadow-inner transform scale-95' 
-          : 'bg-white bg-opacity-30 shadow-md'
-      }`}
-    >
-      {/* Make the icon bigger but keep container the same size */}
-      <span className="text-4xl flex items-center justify-center absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2">
-        {icon}
-      </span>
-    </div>
-    <div className={`text-xs mt-1 text-center font-bold leading-tight transition-all duration-200 ${isClicked ? 'text-shadow' : ''}`}>
-      {text}
+const IconMenuItem = ({ icon, text, isClicked, onClick, onMouseEnter, onMouseLeave, isHovered }) => (
+  <div 
+    className={`menu-item ${isHovered ? "menu-item-hovered" : ""}`}
+    onClick={onClick}
+    onMouseEnter={onMouseEnter}
+    onMouseLeave={onMouseLeave}
+  >
+    <div className={`icon-menu-item ${isClicked ? "icon-menu-item-clicked" : ""}`}>
+      <div className={`icon-container ${isClicked ? "icon-container-clicked" : ""}`}>
+        <span className="icon">{icon}</span>
+      </div>
+      <div className={`item-text ${isClicked ? "item-text-clicked" : ""}`}>
+        {text}
+      </div>
     </div>
   </div>
 );
 
-// Custom Settings Item component without the soft-edged square background
-const SettingsMenuItem = ({ isClicked }) => (
-  <div className={`flex flex-col items-center justify-center py-2 w-full transition-all duration-300 ${isClicked ? 'bg-black bg-opacity-20' : 'bg-transparent'} rounded-lg`}>
-    {/* Settings icon without container - bigger height when clicked */}
-    <div 
-      className={`flex items-center justify-center relative transition-all duration-300 w-16 ${
-        isClicked ? 'h-12' : 'h-10'
-      }`}
-    >
-      <span 
-        className={`text-7xl flex items-center justify-center transition-all duration-300 ${
-          isClicked 
-            ? 'text-black text-opacity-80 filter drop-shadow transform scale-105' 
-            : 'text-black text-opacity-50 filter drop-shadow-sm'
-        }`}
-      >
-        <SettingOutlined />
-      </span>
+// Custom Settings Item component
+const SettingsMenuItem = ({ isClicked, onClick, onMouseEnter, onMouseLeave, isHovered }) => (
+  <div 
+    className={`menu-item ${isHovered ? "menu-item-hovered" : ""}`}
+    onClick={onClick}
+    onMouseEnter={onMouseEnter}
+    onMouseLeave={onMouseLeave}
+  >
+    <div className={`settings-menu-item ${isClicked ? "settings-menu-item-clicked" : ""}`}>
+      <div className={`settings-icon-container ${isClicked ? "settings-icon-container-clicked" : ""}`}>
+        <span className={`settings-icon ${isClicked ? "settings-icon-clicked" : ""}`}>
+          <SettingsIcon />
+        </span>
+      </div>
+      <div className={`item-text ${isClicked ? "item-text-clicked" : ""}`}>
+      </div>
     </div>
-    <div className="text-xs mt-1 text-center font-bold leading-tight"></div>
   </div>
 );
 
 const FoodOrderMenu = () => {
-  // Theme color: E7A5C7 (soft pink/purple)
-  const themeColor = "#E7A5C7";
-
   // Track hover state and clicked state
   const [hoveredKey, setHoveredKey] = useState(null);
   const [clickedKey, setClickedKey] = useState(null);
-
+  
   // Function to handle clicks
   const handleMenuClick = (key) => {
     setClickedKey(key === clickedKey ? null : key); // Toggle clicked state
   };
-
+  
   return (
-    <div className="flex w-full">
+    <div style={{ width: "100%", display: "flex" }}>
       {/* Custom narrow menu with text under icons */}
-      <div
-        className="fixed left-0 top-0 w-24 h-screen flex flex-col justify-between shadow-md"
-        style={{ backgroundColor: themeColor }}
-      >
+      <div className="menu-container">
         {/* Top menu items */}
-        <AntMenu
-          mode="inline"
-          className="w-24 overflow-y-auto pt-5 border-none"
-          style={{ backgroundColor: themeColor }}
-          selectedKeys={[]}
-        >
-          <AntMenu.Item
-            key="1"
-            className={`h-auto my-4 p-0 w-full transition-colors duration-300 ${
-              hoveredKey === "1" ? "bg-white bg-opacity-20" : "bg-transparent"
-            }`}
+        <div className="menu-top">
+          <IconMenuItem
+            icon={<ShoppingIcon />}
+            text="Big Orders"
+            isClicked={clickedKey === "1"}
+            isHovered={hoveredKey === "1"}
+            onClick={() => handleMenuClick("1")}
             onMouseEnter={() => setHoveredKey("1")}
             onMouseLeave={() => setHoveredKey(null)}
-            onClick={() => handleMenuClick("1")}
-          >
-            <IconMenuItem
-              icon={<ShoppingOutlined />}
-              text="Big Orders"
-              isClicked={clickedKey === "1"}
-            />
-          </AntMenu.Item>
-          <AntMenu.Item
-            key="2"
-            className={`h-auto my-4 p-0 w-full transition-colors duration-300 ${
-              hoveredKey === "2" ? "bg-white bg-opacity-20" : "bg-transparent"
-            }`}
+          />
+          <IconMenuItem
+            icon={<AppstoreIcon />}
+            text="Party Trays"
+            isClicked={clickedKey === "2"}
+            isHovered={hoveredKey === "2"}
+            onClick={() => handleMenuClick("2")}
             onMouseEnter={() => setHoveredKey("2")}
             onMouseLeave={() => setHoveredKey(null)}
-            onClick={() => handleMenuClick("2")}
-          >
-            <IconMenuItem
-              icon={<AppstoreOutlined />}
-              text="Party Trays"
-              isClicked={clickedKey === "2"}
-            />
-          </AntMenu.Item>
-          <AntMenu.Item
-            key="3"
-            className={`h-auto my-4 p-0 w-full transition-colors duration-300 ${
-              hoveredKey === "3" ? "bg-white bg-opacity-20" : "bg-transparent"
-            }`}
+          />
+          <IconMenuItem
+            icon={<CoffeeIcon />}
+            text="Solo Orders"
+            isClicked={clickedKey === "3"}
+            isHovered={hoveredKey === "3"}
+            onClick={() => handleMenuClick("3")}
             onMouseEnter={() => setHoveredKey("3")}
             onMouseLeave={() => setHoveredKey(null)}
-            onClick={() => handleMenuClick("3")}
-          >
-            <IconMenuItem
-              icon={<CoffeeOutlined />}
-              text="Solo Orders"
-              isClicked={clickedKey === "3"}
-            />
-          </AntMenu.Item>
-        </AntMenu>
-
+          />
+        </div>
+        
         {/* Bottom menu item - Settings */}
-        <AntMenu
-          mode="inline"
-          className="w-24 mb-5 border-none"
-          style={{ backgroundColor: themeColor }}
-          selectedKeys={[]}
-        >
-          <AntMenu.Item
-            key="4"
-            className={`h-auto my-4 p-0 w-full transition-colors duration-300 ${
-              hoveredKey === "4" ? "bg-white bg-opacity-20" : "bg-transparent"
-            }`}
+        <div className="menu-bottom">
+          <SettingsMenuItem
+            isClicked={clickedKey === "4"}
+            isHovered={hoveredKey === "4"}
+            onClick={() => handleMenuClick("4")}
             onMouseEnter={() => setHoveredKey("4")}
             onMouseLeave={() => setHoveredKey(null)}
-            onClick={() => handleMenuClick("4")}
-          >
-            <SettingsMenuItem isClicked={clickedKey === "4"} />
-          </AntMenu.Item>
-        </AntMenu>
+          />
+        </div>
       </div>
-
+      
       {/* Main content area */}
-      <div className="ml-24 p-5 w-full" style={{ width: "calc(100% - 6rem)" }}>
-        <h1 className="text-xl font-bold mb-4">Food Order App</h1>
-        <p>Click on a menu item to see it in action!</p>
-        {clickedKey && (
-          <div className="mt-4 p-4 bg-gray-100 rounded-lg">
-            <p className="font-bold">
-              {clickedKey === "1" && "Big Orders Section"}
-              {clickedKey === "2" && "Party Trays Section"}
-              {clickedKey === "3" && "Solo Orders Section"}
-              {clickedKey === "4" && "Settings Section"}
-            </p>
-          </div>
-        )}
+      <div className="main-content">
+        {/* Your content goes here */}
       </div>
     </div>
   );
