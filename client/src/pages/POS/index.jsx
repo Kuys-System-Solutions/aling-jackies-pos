@@ -4,10 +4,9 @@ import Header from "../../components/header";
 
 export default function POS() {
   return (
-    <Fragment>
+    <div>
       <CategoryBar />
-
       <Header />
-    </Fragment>
+    </div>
   );
 }
