@@ -4,11 +4,14 @@
 
 1. In `server` (no need to `cd` into the directory):
 
-- create a virtual environment with `python -m venv .venv`
+- create a virtual environment with `python3 -m venv .venv`
 - activate the virtual environment with `source .venv/bin/activate` (`.venv/Scripts/activate` for Windows)
+- go to the directory of requirements.txt `cd server`
 - install dependencies with `pip install -r requirements.txt`
+- go to root directory `cd ..`
 - initialize database with `python -m server.init_db` (incidentally, you can wipe the database with `python -m server.wipe_db`)
-- run Flask server with `python -m server.app`
+- go to the directory of requirements.txt `cd server`
+- run Flask server with `python3 -m app.py`
 
 2. In `client` (remember to run `cd client` first):
 
