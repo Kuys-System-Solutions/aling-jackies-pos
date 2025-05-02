@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import '../../App.css';
 import { useParams } from 'react-router';
-
+import ItemView from '../../components/ItemView'
 export default function OrderView() {
   const [data, setData] = useState({ items: [], pagination: {} });
   const [loading, setLoading] = useState(true);
@@ -44,6 +44,7 @@ export default function OrderView() {
   return (
     <>
       <h1>Home</h1>
+      <ItemView/>
       <p>Welcome to the order page for {orderType}!</p>
       <p>Here you can place your orders.</p>
       <div>
