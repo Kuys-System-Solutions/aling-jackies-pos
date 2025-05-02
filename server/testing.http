@@ -23,7 +23,7 @@ content-type: application/json
 PATCH http://localhost:5000/api/items/1 HTTP/1.1
 content-type: application/json
 
-{ "item_name": "ches dog", "price": 100, "image": "/path/to/images" }
+{ "item_name": "Hotdog lang", "price": 100, "image": "/path/to/images" }
 
 ###
 

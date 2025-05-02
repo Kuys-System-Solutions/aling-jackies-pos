@@ -15,32 +15,6 @@ logging.basicConfig(
 )
 logger = logging.getLogger(__name__)
 
-# Check if repository directory exists
-repo_path = os.path.join(os.path.dirname(__file__), 'repository')
-if not os.path.exists(repo_path):
-    os.makedirs(repo_path)
-    with open(os.path.join(repo_path, '__init__.py'), 'w') as f:
-        pass  # Create empty __init__.py file
-
-# Check if models directory exists
-models_path = os.path.join(os.path.dirname(__file__), 'models')
-if not os.path.exists(models_path):
-    os.makedirs(models_path)
-    with open(os.path.join(models_path, '__init__.py'), 'w') as f:
-        pass  # Create empty __init__.py file
-
-# Check if controller directory exists
-controller_path = os.path.join(os.path.dirname(__file__), 'controller')
-if not os.path.exists(controller_path):
-    os.makedirs(controller_path)
-    with open(os.path.join(controller_path, '__init__.py'), 'w') as f:
-        pass  # Create empty __init__.py file
-
-# Create repository file if it doesn't exist
-repo_file = os.path.join(repo_path, 'item_repository.py')
-if not os.path.exists(repo_file):
-    # This is a placeholder - the actual file should be created separately
-    logger.info(f"Repository file does not exist: {repo_file}")
 
 app = Flask(__name__)
 app.register_blueprint(item_bp)
