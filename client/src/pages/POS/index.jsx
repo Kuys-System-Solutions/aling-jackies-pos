@@ -9,31 +9,9 @@ export default function POS() {
   
 
   return (
-<<<<<<< Updated upstream
     <div>
       <CategoryBar />
       <Header />
     </div>
-=======
-    <Fragment>
-      {/* Main header */}
-      <Header />
-      
-      {/* Main content with side-by-side panels */}
-      <div style={{ 
-        display: 'flex', 
-        height: 'calc(100vh - 60px)', // Adjust based on your header height
-        overflow: 'hidden'
-      }}>
-        {/* Left sidebar - Category bar */}
-        <CategoryBar />
-        
-        {/* Main content - Item View */}
-        {/* <ItemView onSelectItem={handleSelectItem} /> */}
-        
-        {/* Right sidebar would be OrderList if needed */}
-      </div>
-    </Fragment>
->>>>>>> Stashed changes
   );
 }
