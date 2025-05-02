@@ -1,19 +1,19 @@
-# server/controller/menu_item_controller.py
+# server/controller/item_controller.py
 from flask import request, jsonify, Blueprint
 import logging
-from ..models.item_model import MenuItem
-from ..repository.item_repository import MenuItemRepository
+from models import item_model
+from repository import item_repository
 
 # Configure controller logger
 logger = logging.getLogger(__name__)
 
 # Create a Blueprint for the menu item routes
-menu_item_bp = Blueprint('menu_item', __name__, url_prefix='/api/items')
+item_bp = Blueprint('item', __name__, url_prefix='/api/items')
 
 # Initialize the repository
-menu_item_repo = MenuItemRepository()
+item_repo = item_repository.ItemRepository()
 
-@menu_item_bp.route('', methods=['GET'])
+@item_bp.route('', methods=['GET'])
 def get_all_items():
     """
     Get all menu items with pagination
@@ -42,7 +42,7 @@ def get_all_items():
             logger.warning(f"Invalid per_page parameter, defaulting to per_page=10")
             
         # Get items from repository
-        result = menu_item_repo.get_all_items(page, per_page)
+        result = item_repo.get_all_items(page, per_page)
         
         if result is None:
             logger.error("Failed to retrieve items from repository")
@@ -53,7 +53,7 @@ def get_all_items():
     except Exception as e:
         return jsonify({"error": str(e)}), 500
 
-@menu_item_bp.route('/<int:item_id>', methods=['GET'])
+@item_bp.route('/<int:item_id>', methods=['GET'])
 def get_item(item_id):
     """
     Get a menu item by ID
@@ -65,7 +65,7 @@ def get_item(item_id):
         JSON: Menu item data or error message
     """
     try:
-        item = menu_item_repo.get_item_by_id(item_id)
+        item = item_repo.get_item_by_id(item_id)
         
         if item is None:
             return jsonify({"error": "Item not found"}), 404
@@ -74,7 +74,7 @@ def get_item(item_id):
     except Exception as e:
         return jsonify({"error": str(e)}), 500
 
-@menu_item_bp.route('', methods=['POST'])
+@item_bp.route('', methods=['POST'])
 def add_item():
     """
     Create a new menu item
@@ -88,24 +88,26 @@ def add_item():
         JSON: Success message and new item ID, or error message
     """
     try:
-        data = request.get_json()
+        data = request.get_json(force=True)
+
+        print('we are here!')
         
-        # Create and validate a new MenuItem
-        menu_item = MenuItem.from_dict(data)
-        is_valid, error_msg = menu_item.validate()
+        # Create and validate a new Item
+        item = item_model.Item.from_dict(data)
+        is_valid, error_msg = item.validate()
         
         if not is_valid:
             return jsonify({"error": error_msg}), 400
             
         # Check if item with the same name already exists
-        if menu_item_repo.item_exists(menu_item.item_name):
+        if item_repo.item_exists(item.item_name):
             return jsonify({"error": "An item with this name already exists"}), 409
-            
+
         # Create the item in the repository
-        new_id = menu_item_repo.create_item({
-            "item_name": menu_item.item_name,
-            "price": menu_item.price,
-            "image_path": menu_item.image_path
+        new_id = item_repo.create_item({
+            "item_name": item.item_name,
+            "price": item.price,
+            "image_path": item.image_path
         })
         
         if new_id is None:
@@ -118,7 +120,7 @@ def add_item():
     except Exception as e:
         return jsonify({"error": str(e)}), 500
 
-@menu_item_bp.route('/<int:item_id>', methods=['PATCH'])
+@item_bp.route('/<int:item_id>', methods=['PATCH'])
 def update_item(item_id):
     """
     Update an existing menu item
@@ -138,12 +140,12 @@ def update_item(item_id):
         data = request.get_json()
         
         # Check if the item exists
-        existing_item = menu_item_repo.get_item_by_id(item_id)
+        existing_item = item_repo.get_item_by_id(item_id)
         if existing_item is None:
             return jsonify({"error": "Item not found"}), 404
             
-        # Create a MenuItem with the updated data
-        updated_item = MenuItem.from_dict({**existing_item, **data})
+        # Create a Item with the updated data
+        updated_item = item_model.Item.from_dict({**existing_item, **data})
         
         # Validate the updated item
         is_valid, error_msg = updated_item.validate()
@@ -151,7 +153,7 @@ def update_item(item_id):
             return jsonify({"error": error_msg}), 400
             
         # Update the item in the repository
-        success = menu_item_repo.update_item(item_id, updated_item.to_dict())
+        success = item_repo.update_item(item_id, updated_item.to_dict())
         
         if not success:
             return jsonify({"error": "Failed to update item"}), 500
@@ -160,7 +162,7 @@ def update_item(item_id):
     except Exception as e:
         return jsonify({"error": str(e)}), 500
 
-@menu_item_bp.route('/<int:item_id>', methods=['DELETE'])
+@item_bp.route('/<int:item_id>', methods=['DELETE'])
 def delete_item(item_id):
     """
     Delete a menu item
@@ -173,12 +175,12 @@ def delete_item(item_id):
     """
     try:
         # Check if the item exists
-        existing_item = menu_item_repo.get_item_by_id(item_id)
+        existing_item = item_repo.get_item_by_id(item_id)
         if existing_item is None:
             return jsonify({"error": "Item not found"}), 404
             
         # Delete the item from the repository
-        success = menu_item_repo.delete_item(item_id)
+        success = item_repo.delete_item(item_id)
         
         if not success:
             return jsonify({"error": "Failed to delete item"}), 500
@@ -187,7 +189,7 @@ def delete_item(item_id):
     except Exception as e:
         return jsonify({"error": str(e)}), 500
 
-@menu_item_bp.route('/search', methods=['GET'])
+@item_bp.route('/search', methods=['GET'])
 def search_items():
     """
     Search for menu items by name
@@ -204,13 +206,13 @@ def search_items():
         if not search_term:
             return jsonify({"error": "Search term is required"}), 400
             
-        items = menu_item_repo.search_items(search_term)
+        items = item_repo.search_items(search_term)
         
         return jsonify({"items": items, "count": len(items)}), 200
     except Exception as e:
         return jsonify({"error": str(e)}), 500
 
-@menu_item_bp.route('/price-range', methods=['GET'])
+@item_bp.route('/price-range', methods=['GET'])
 def get_by_price_range():
     """
     Get menu items within a price range
@@ -232,7 +234,7 @@ def get_by_price_range():
         if max_price < min_price:
             return jsonify({"error": "Maximum price cannot be less than minimum price"}), 400
             
-        items = menu_item_repo.get_items_by_price_range(min_price, max_price)
+        items = item_repo.get_items_by_price_range(min_price, max_price)
         
         return jsonify({"items": items, "count": len(items)}), 200
     except Exception as e:

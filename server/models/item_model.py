@@ -1,14 +1,14 @@
 # server/models/menu_item_model.py
 from datetime import datetime
 
-class MenuItem:
+class Item:
     """
     Model class for menu items in Aling Jackie's POS system.
     """
     
     def __init__(self, item_id=None, item_name=None, price=None, image_path=None, created_at=None):
         """
-        Initialize a new MenuItem object
+        Initialize a new Item object
         
         Args:
             item_id (int, optional): The item's unique identifier
@@ -26,13 +26,13 @@ class MenuItem:
     @classmethod
     def from_dict(cls, data):
         """
-        Create a MenuItem from a dictionary
+        Create a Item from a dictionary
         
         Args:
             data (dict): Dictionary containing item data
             
         Returns:
-            MenuItem: A new MenuItem instance
+            Item: A new Item instance
         """
         return cls(
             item_id=data.get('id'),
@@ -44,10 +44,10 @@ class MenuItem:
     
     def to_dict(self):
         """
-        Convert the MenuItem to a dictionary
+        Convert the Item to a dictionary
         
         Returns:
-            dict: Dictionary representation of the MenuItem
+            dict: Dictionary representation of the Item
         """
         return {
             'id': self.id,
@@ -59,7 +59,7 @@ class MenuItem:
     
     def validate(self):
         """
-        Validate the MenuItem data
+        Validate the Item data
         
         Returns:
             tuple: (is_valid, error_message)
@@ -67,6 +67,8 @@ class MenuItem:
         if not self.item_name or not isinstance(self.item_name, str) or len(self.item_name) < 1:
             return False, "Item name is required and must be a non-empty string"
         
+        print(isinstance(self.price, (int, float)))
+
         if self.price is None or not (isinstance(self.price, (int, float)) and self.price >= 0):
             return False, "Price is required and must be a non-negative number"
         
@@ -77,11 +79,11 @@ class MenuItem:
         return True, None
     
     def __str__(self):
-        """String representation of the MenuItem"""
-        return f"MenuItem(id={self.id}, name={self.item_name}, price={self.price})"
+        """String representation of the Item"""
+        return f"Item(id={self.id}, name={self.item_name}, price={self.price})"
     
     def __repr__(self):
-        """Detailed representation of the MenuItem"""
-        return (f"MenuItem(id={self.id}, name={self.item_name}, "
+        """Detailed representation of the Item"""
+        return (f"Item(id={self.id}, name={self.item_name}, "
                 f"price={self.price}, image_path={self.image_path}, "
                 f"created_at={self.created_at})")

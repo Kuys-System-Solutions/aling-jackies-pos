@@ -6,7 +6,7 @@ from datetime import datetime
 # Configure repository logger
 logger = logging.getLogger(__name__)
 
-class MenuItemRepository:
+class ItemRepository:
     def __init__(self, db_path='pos.db'):
         self.db_path = db_path
     

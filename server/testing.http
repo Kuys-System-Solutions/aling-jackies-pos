@@ -3,11 +3,7 @@ POST http://localhost:5000/api/items HTTP/1.1
 content-type: application/json
 
 // Test payload from a test POST request.
-{
-    "name": "Cheesedog",
-    "price": "1000",
-    "image": "/path/to/image",
-}
+{ "item_name": "Cheesedog", "price": 1000, "image": "/path/to/image" }
 
 ###
 
@@ -18,20 +14,16 @@ content-type: application/json
 ###
 
 // Get specific item
-GET http://localhost:5000/api/items/10 HTTP/1.1
+GET http://localhost:5000/api/items/1 HTTP/1.1
 content-type: application/json
 
 ###
 
 // Update specific item
-PATCH http://localhost:5000/api/items/10 HTTP/1.1
+PATCH http://localhost:5000/api/items/1 HTTP/1.1
 content-type: application/json
 
-{
-    "item_name": "Hatdog Hatdog Hatdiggitydog",
-    "item_price": "10000000",
-    "item_image": "/path/to/images"
-}
+{ "item_name": "Hotdog lang", "price": 10000000, "image": "/path/to/images" }
 
 ###
 

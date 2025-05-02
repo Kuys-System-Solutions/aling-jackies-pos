@@ -6,7 +6,7 @@ import os
 import json
 import logging
 import sys
-from .controller.item_controller import menu_item_bp
+from controller.item_controller import item_bp
 
 # Configure logging
 logging.basicConfig(
@@ -37,13 +37,13 @@ if not os.path.exists(controller_path):
         pass  # Create empty __init__.py file
 
 # Create repository file if it doesn't exist
-repo_file = os.path.join(repo_path, 'menu_item_repository.py')
+repo_file = os.path.join(repo_path, 'item_repository.py')
 if not os.path.exists(repo_file):
     # This is a placeholder - the actual file should be created separately
     logger.info(f"Repository file does not exist: {repo_file}")
 
 app = Flask(__name__)
-app.register_blueprint(menu_item_bp)
+app.register_blueprint(item_bp)
 
 """
 Each function here is an API endpoint.
