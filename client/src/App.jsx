@@ -1,50 +1,20 @@
 import { useState, useEffect } from 'react';
 import './App.css';
-import { Routes, Route } from 'react-router';
+import KitchenView from './pages/KitchenView';
+import Index from './pages/Index';
 import OrderView from './pages/OrderView';
-import PendingOrders from './pages/PendingOrders';
 import OrderHistory from './pages/OrderHistory';
-import KitchenView from './pages/KitchenView';  // Add this import
+import { Routes, Route } from 'react-router';
 
 
 function App() {
   return (
     <Routes>
       <Route path="/" element={<Index />} />
-      <Route path="/order-now" element={<OrderView />} />
-      <Route path="/current-orders/:id" element={<PendingOrders />} />
+      <Route path="/order-now/:mode" element={<OrderView />} />
       <Route path="/order-history" element={<OrderHistory />} />
-      <Route path="/kitchen" element={<KitchenView />} />
+      <Route path="/kitchen/:mode" element={<KitchenView />} />
     </Routes>
-  );
-}
-
-function Index() {
-  const [data, setData] = useState(undefined);
-
-  useEffect(() => {
-    fetch('/api')
-      .then((res) => res.json())
-      .then((data) => {
-        setData(data);
-      });
-  }, []);
-
-  return (
-    <>
-      <h1>Welcome to Aling Jackie's POS and Inventory System!</h1>
-      <p>Hello from React...</p>
-      {typeof data === 'undefined' ? (
-        <p>Loading...</p>
-      ) : (
-        <p>...and {data.message}</p>
-      )}
-
-      <p>This is where we add the Dine In/Take Out options.</p>
-      <p>
-        Try going to the <a href="/order-now">POS</a> page.
-      </p>
-    </>
   );
 }
 
