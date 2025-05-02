@@ -1,9 +1,13 @@
-import React from 'react';
+import React, { Fragment } from "react";
+import CategoryBar from "../../components/categoryBar";
+import Header from "../../components/header";
 
-export default function EmptyComponent() {
+export default function POS() {
   return (
-    <div>
-      <h1>Hello</h1>
-    </div>
+    <Fragment>
+      <CategoryBar />
+
+      <Header />
+    </Fragment>
   );
 }
