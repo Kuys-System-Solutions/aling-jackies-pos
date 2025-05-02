@@ -1,10 +1,24 @@
 import { useState, useEffect } from 'react';
 import '../../App.css';
+import { useParams } from 'react-router';
 
 export default function OrderView() {
   const [data, setData] = useState({ items: [], pagination: {} });
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
+  const [orderType, setOrderType] = useState(''); // State to hold the order type
+  const params = useParams();
+
+  useEffect(() => {
+    const mode = params.mode;
+    if (mode === 'dine-in') {
+      setOrderType('Dine-In');
+    } else if (mode === 'take-out') {
+      setOrderType('Take-Out');
+    } else {
+      setOrderType('Unknown');
+    }
+  }, [params]);
 
   useEffect(() => {
     setLoading(true);
@@ -30,7 +44,7 @@ export default function OrderView() {
   return (
     <>
       <h1>Home</h1>
-      <p>Welcome to the order page!</p>
+      <p>Welcome to the order page for {orderType}!</p>
       <p>Here you can place your orders.</p>
       <div>
         <h2>Menu Items</h2>
@@ -42,7 +56,8 @@ export default function OrderView() {
           <ul>
             {data.items.map((item, index) => (
               <li key={item.id || index}>
-                {item.item_name} - ${(item.price / 100).toFixed(2)} - {item.image_path}
+                {item.item_name} - ${(item.price / 100).toFixed(2)} -{' '}
+                {item.image_path}
               </li>
             ))}
           </ul>
