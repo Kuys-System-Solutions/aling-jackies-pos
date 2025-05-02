@@ -5,6 +5,7 @@ import Index from './pages/Index';
 import OrderView from './pages/OrderView';
 import OrderHistory from './pages/OrderHistory';
 import StudioView from './pages/StudioView'; // Add this import
+import POS from './pages/POS';  
 import { Routes, Route } from 'react-router';
 
 function App() {
@@ -15,6 +16,8 @@ function App() {
       <Route path="/order-history" element={<OrderHistory />} />
       <Route path="/kitchen" element={<KitchenView />} /> {/* Done */}
       <Route path="/studio" element={<StudioView />} /> {/* Done */}
+      <Route path="/pos" element={<POS />} />  {/* Add this new route */}
+
     </Routes>
   );
 }
