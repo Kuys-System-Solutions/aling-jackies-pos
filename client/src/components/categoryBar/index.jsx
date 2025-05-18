@@ -129,11 +129,7 @@ const FoodOrderMenu = () => {
           />
         </div>
       </div>
-      
-      {/* Main content area */}
-      <div className="main-content">
-        <ItemView onSelectItem={handleSelectItem} />
-      </div>
+
     </div>
   );
 };
