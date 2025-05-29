@@ -27,3 +27,10 @@ The frontend and backend communicate with JSON using an API whose endpoints are 
 Refer to `./server/testing.http` for API endpoint testing. Use API tools like cURL, Postman, or REST Client (recommended) to test non-GET HTTP methods.
 
 Refer to `./client/src/App.jsx` to see app routes. Routing between pages hasn't been implemented yet.
+
+
+ORDERS
+--- spaghetti               100 PHP
+|____ gawing carbonara
+--- carbonara               100 PHP
+|____ gawing spaghetti
