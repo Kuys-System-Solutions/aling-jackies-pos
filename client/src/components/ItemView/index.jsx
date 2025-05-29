@@ -111,8 +111,10 @@ const ItemView = ({ onSelectItem }) => {
       display: 'flex',
       flexDirection: 'column',
       height: '100vh',
+      width: '62%',
+      top: '86px',
       overflow: 'hidden',
-      marginLeft: '0', // Ensure no left margin
+      marginLeft: '100px', // Ensure no left margin
       position: 'relative'
     }}>
     
@@ -121,7 +123,7 @@ const ItemView = ({ onSelectItem }) => {
       <div style={{ 
         backgroundColor: '#f0d4e4', 
         borderRadius: '15px', 
-        margin: '0 15px 15px 15px', 
+        margin: '0 0 15px 15px', 
         padding: '5px', 
         overflowX: 'auto', 
         whiteSpace: 'nowrap' 

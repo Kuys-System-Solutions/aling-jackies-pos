@@ -2,6 +2,7 @@ import React, { Fragment, useState, useEffect } from 'react';
 import CategoryBar from '../../components/categoryBar';
 import Header from '../../components/header';
 import ItemView from '../../components/ItemView';
+import OrderList from "../../components/OrderList";
 import { useParams } from 'react-router';
 
 // import OrderList from "../../components/OrderList";
@@ -34,6 +35,8 @@ export default function POS() {
     <div>
       <CategoryBar />
       <Header />
+      <ItemView />
+      <OrderList />
     </div>
   );
 }
