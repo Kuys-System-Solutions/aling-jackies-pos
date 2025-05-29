@@ -1,24 +1,10 @@
 import { useState, useEffect } from 'react';
 import '../../App.css';
-import { useParams } from 'react-router';
 import ItemView from '../../components/ItemView'
 export default function OrderView() {
   const [data, setData] = useState({ items: [], pagination: {} });
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
-  const [orderType, setOrderType] = useState(''); // State to hold the order type
-  const params = useParams();
-
-  useEffect(() => {
-    const mode = params.mode;
-    if (mode === 'dine-in') {
-      setOrderType('Dine-In');
-    } else if (mode === 'take-out') {
-      setOrderType('Take-Out');
-    } else {
-      setOrderType('Unknown');
-    }
-  }, [params]);
 
   useEffect(() => {
     setLoading(true);
@@ -45,7 +31,6 @@ export default function OrderView() {
     <>
       <h1>Home</h1>
       <ItemView/>
-      <p>Welcome to the order page for {orderType}!</p>
       <p>Here you can place your orders.</p>
       <div>
         <h2>Menu Items</h2>

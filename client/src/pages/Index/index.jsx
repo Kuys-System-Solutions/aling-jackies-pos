@@ -1,7 +1,10 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import logo from '/logo.png';
+import { useNavigate } from 'react-router';
 
 const KitchenView = () => {
+  const navigate = useNavigate();
+
   return (
     <div className="kitchen-view-wrapper">
       <header className="kitchen-header">
@@ -11,10 +14,20 @@ const KitchenView = () => {
       </header>
 
       <div className="main-content flex flex-row items-center justify-center">
-        <button type="button" className="text-4xl font-bold m-5 py-100 w-[40%] bg-yellow-200 hover:bg-yellow-300 hover:cursor-pointer rounded-xl drop-shadow-lg">
+        <button
+          type="button"
+          onClick={() => {navigate('/pos/dine-in')}}
+          className="text-4xl font-bold m-5 py-100 w-[40%] bg-yellow-200 hover:bg-yellow-300 hover:cursor-pointer rounded-xl drop-shadow-lg"
+        >
           Dine-In
         </button>
-        <button type="button" className="text-4xl font-bold m-5 py-100 w-[40%] bg-pink-200 hover:bg-pink-300 hover:cursor-pointer rounded-xl drop-shadow-lg">Take-Out</button>
+        <button
+          type="button"
+          onClick={() => {navigate('/pos/take-out')}}
+          className="text-4xl font-bold m-5 py-100 w-[40%] bg-pink-200 hover:bg-pink-300 hover:cursor-pointer rounded-xl drop-shadow-lg"
+        >
+          Take-Out
+        </button>
       </div>
     </div>
   );

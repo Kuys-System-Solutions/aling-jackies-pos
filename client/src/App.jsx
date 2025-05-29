@@ -12,11 +12,10 @@ function App() {
   return (
     <Routes>
       <Route path="/" element={<Index />} /> {/* Done */}
-      <Route path="/order-now/:mode" element={<OrderView />} />
-      <Route path="/order-history" element={<OrderHistory />} />
+      <Route path="/order-history" element={<OrderHistory />} /> {/* Done (sorta) */}
       <Route path="/kitchen" element={<KitchenView />} /> {/* Done */}
       <Route path="/studio" element={<StudioView />} /> {/* Done */}
-      <Route path="/pos" element={<POS />} />  {/* Add this new route */}
+      <Route path="/pos/:mode" element={<POS />} />  {/* Add this new route */}
 
     </Routes>
   );
