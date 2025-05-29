@@ -1,31 +1,45 @@
 import React from 'react';
 
-const OrderList = ({ orderItems = [], onRemoveItem, onUpdateQuantity, onClearOrder, onOrder, isLoading = false }) => {
+const OrderList = ({ orderItems, setOrderItems }) => {
   // Calculate totals
   const subtotal = orderItems.reduce((sum, item) => sum + (item.price * item.quantity), 0);
   const discount = subtotal > 0 ? 69.00 : 0; // Example discount logic
   const grandTotal = Math.max(0, subtotal - discount);
 
-  // Placeholder items for when the list is empty or loading
-  const placeholderItems = [
-    {
-      id: 'placeholder-1',
-      name: 'Bundle Combo Packed',
-      price: 2550,
-      quantity: 1,
-      image: 'https://phohoangminh.com/img/placeholders/burger_placeholder.png?v=1'
-    },
-    {
-      id: 'placeholder-2',
-      name: 'Bundle Princess',
-      price: 1200, 
-      quantity: 1,
-      image: 'https://phohoangminh.com/img/placeholders/burger_placeholder.png?v=1'
-    }
-  ];
+  function onRemoveItem(item) {
+    setOrderItems(currentItems => currentItems.filter(i => i.id !== item));
+  }
 
-  // Determine which items to show - real ones or placeholders
-  const itemsToShow = orderItems.length > 0 ? orderItems : placeholderItems;
+  function onUpdateQuantity(item, quantity) {
+    setOrderItems(currentItems =>
+      currentItems.map(i => 
+        i.id === item ? { ...i, quantity: Math.max(1, quantity) } : i
+      )
+    );
+  }
+
+  function onUpdateSpecialInstructions(item, instructions) {
+    setOrderItems(currentItems =>
+      currentItems.map(i =>
+        i.id === item ? { ...i, specialInstructions: instructions } : i
+      )
+    );
+  }
+
+  function onClearOrder() {
+    setOrderItems([]);
+  }
+
+  function onOrder() {
+    // handle order submission
+    // this part will interface with the backend to submit the order
+    
+    // preview of order
+    console.log('Order submitted:', orderItems);
+
+    // then clear
+    onClearOrder();
+  }
 
   return (
     <div style={{
@@ -46,7 +60,7 @@ const OrderList = ({ orderItems = [], onRemoveItem, onUpdateQuantity, onClearOrd
         overflowY: 'auto',
         padding: '10px'
       }}>
-        {itemsToShow.map(item => (
+        {orderItems.map(item => (
           <div 
             key={item.id} 
             style={{
@@ -84,7 +98,7 @@ const OrderList = ({ orderItems = [], onRemoveItem, onUpdateQuantity, onClearOrd
                     color: '#4CAF50', 
                     fontSize: '14px'
                   }}>
-                    P {item.price.toLocaleString()} each
+                    {item.quantity > 1 ? `₱${(item.price * item.quantity).toLocaleString()} (₱${item.price.toLocaleString()} each)` : `₱${item.price.toLocaleString()}`}
                   </div>
                 </div>
               </div>
@@ -215,11 +229,8 @@ const OrderList = ({ orderItems = [], onRemoveItem, onUpdateQuantity, onClearOrd
                   placeholder="Special instructions (no onions, garlic, etc.)"
                   value={item.specialInstructions || ''}
                   onChange={(e) => {
-                    if (!item.id.toString().includes('placeholder') && onUpdateQuantity) {
-                      onUpdateQuantity(item.id, item.quantity, e.target.value);
-                    }
+                    onUpdateSpecialInstructions(item.id, e.target.value);
                   }}
-                  disabled={item.id.toString().includes('placeholder')}
                   style={{
                     width: '100%',
                     border: 'none',
@@ -235,13 +246,13 @@ const OrderList = ({ orderItems = [], onRemoveItem, onUpdateQuantity, onClearOrd
           </div>
         ))}
 
-        {itemsToShow.length === 0 && (
+        {orderItems.length === 0 && (
           <div style={{ 
             textAlign: 'center', 
             padding: '30px 0', 
             color: '#999'
           }}>
-            No items in order yet
+            No items in order.
           </div>
         )}
       </div>
