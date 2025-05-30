@@ -109,9 +109,8 @@ const categories = [
   'Brownies',
 ];
 
-const ItemView = ({ orderItems, setOrderItems }) => {
+const ItemView = ({ orderItems, setOrderItems, searchTerm }) => {
   const [selectedCategory, setSelectedCategory] = useState('All');
-  const [searchTerm, setSearchTerm] = useState('');
 
   // Filter items based on category and search term
   const filteredItems = menuItems.filter((item) => {

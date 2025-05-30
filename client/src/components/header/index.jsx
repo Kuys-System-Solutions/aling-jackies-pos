@@ -5,7 +5,7 @@ import "./index.css";
 
 const Logo = "./src/assets/logo.png";
 
-const Header = () => {
+const Header = ({ onSearch }) => {
   return (
     <header className="header">
       {/* Logo */}
@@ -20,6 +20,7 @@ const Header = () => {
         <Input
           placeholder="Search..."
           className="search-input"
+          onChange={(e) => onSearch(e.target.value)}
         />
         {/* Search Icon */}
         <SearchOutlined className="search-icon" />
