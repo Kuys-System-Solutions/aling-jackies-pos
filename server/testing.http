@@ -9,12 +9,7 @@
 POST http://localhost:5000/api/items HTTP/1.1
 content-type: application/json
 
-{
-  "item_name": "Cheesedog",
-  "price": 1000,
-  "image_path": "/path/to/image",
-  "category_id": 1
-}
+{ "item_name": "Cheesedog", "price": 1000, "image_path": "/path/to/image", "category_id": 2 }
 
 ###
 
@@ -38,7 +33,7 @@ content-type: application/json
   "item_name": "Hotdog lang",
   "price": 100,
   "image_path": "/path/to/images",
-  "category_id": 1
+  "category_id": 2
 }
 
 ###

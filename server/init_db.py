@@ -13,7 +13,7 @@ def init_db():
             category_name TEXT,
             parent_category_id INTEGER,
             created_at DATETIME DEFAULT CURRENT_TIMESTAMP,
-            FOREIGN KEY (parent_category_id) REFERENCES categories(id)
+            FOREIGN KEY (parent_category_id) REFERENCES categories(id) ON DELETE CASCADE
         )
     ''')
 
@@ -26,7 +26,7 @@ def init_db():
             image_path TEXT,
             category_id INTEGER NOT NULL,
             created_at DATETIME DEFAULT CURRENT_TIMESTAMP,
-            FOREIGN KEY (category_id) REFERENCES categories(id)
+            FOREIGN KEY (category_id) REFERENCES categories(id) ON DELETE CASCADE
         )
     ''')
     

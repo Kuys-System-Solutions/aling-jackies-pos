@@ -124,7 +124,7 @@ class ItemRepository:
             with self._get_connection() as conn:
                 cursor = conn.cursor()
                 cursor.execute(
-                    "INSERT INTO items (item_name, price, image_path, created_at) VALUES (?, ?, ?, ?, ?)",
+                    "INSERT INTO items (item_name, price, image_path, category_id, created_at) VALUES (?, ?, ?, ?, ?)",
                     (name, price, image, category_id, created_at)
                 )
                 conn.commit()

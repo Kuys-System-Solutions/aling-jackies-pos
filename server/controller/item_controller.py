@@ -89,8 +89,6 @@ def add_item():
     """
     try:
         data = request.get_json(force=True)
-
-        print('we are here!')
         
         # Create and validate a new Item
         item = item_model.Item.from_dict(data)
@@ -107,7 +105,8 @@ def add_item():
         new_id = item_repo.create_item({
             "item_name": item.item_name,
             "price": item.price,
-            "image_path": item.image_path
+            "image_path": item.image_path,
+            "category_id": item.category_id
         })
         
         if new_id is None:
