@@ -6,7 +6,7 @@ class Item:
     Model class for menu items in Aling Jackie's POS system.
     """
     
-    def __init__(self, item_id=None, item_name=None, price=None, image_path=None, created_at=None):
+    def __init__(self, item_id=None, item_name=None, price=None, image_path=None, category_id=None, created_at=None):
         """
         Initialize a new Item object
         
@@ -21,6 +21,7 @@ class Item:
         self.item_name = item_name
         self.price = price
         self.image_path = image_path
+        self.category_id = category_id
         self.created_at = created_at if created_at else datetime.now().strftime('%Y-%m-%d %H:%M:%S')
     
     @classmethod
@@ -39,6 +40,7 @@ class Item:
             item_name=data.get('item_name'),
             price=data.get('price'),
             image_path=data.get('image_path'),
+            category_id=data.get('category_id'),
             created_at=data.get('created_at')
         )
     
@@ -54,6 +56,7 @@ class Item:
             'item_name': self.item_name,
             'price': self.price,
             'image_path': self.image_path,
+            'category_id': self.category_id,
             'created_at': self.created_at
         }
     

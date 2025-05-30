@@ -6,6 +6,17 @@ def init_db():
     conn = sqlite3.connect('pos.db')
     c = conn.cursor()
     
+    # Create categories table
+    c.execute('''
+        CREATE TABLE IF NOT EXISTS categories (
+            id INTEGER PRIMARY KEY AUTOINCREMENT,
+            category_name TEXT,
+            parent_category_id INTEGER,
+            created_at DATETIME DEFAULT CURRENT_TIMESTAMP,
+            FOREIGN KEY (parent_category_id) REFERENCES categories(id)
+        )
+    ''')
+
     # Create items table
     c.execute('''
         CREATE TABLE IF NOT EXISTS items (
@@ -13,7 +24,9 @@ def init_db():
             item_name TEXT,
             price REAL,
             image_path TEXT,
-            created_at DATETIME DEFAULT CURRENT_TIMESTAMP
+            category_id INTEGER NOT NULL,
+            created_at DATETIME DEFAULT CURRENT_TIMESTAMP,
+            FOREIGN KEY (category_id) REFERENCES categories(id)
         )
     ''')
     
