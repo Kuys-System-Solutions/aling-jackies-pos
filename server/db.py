@@ -9,6 +9,7 @@ class Item(db.Model):
     item_name = db.Column(db.String(120), nullable=False)
     price = db.Column(db.Float, nullable=False)
     image_path = db.Column(db.String(255))
+    category_id = db.Column(db.Integer, db.ForeignKey('categories.id'), nullable=False)
     created_at = db.Column(db.DateTime, server_default=db.func.current_timestamp())
 
 class Order(db.Model):

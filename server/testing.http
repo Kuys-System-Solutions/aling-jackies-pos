@@ -1,35 +1,119 @@
-// Add item
+# Test API calls for item_controller and category_controller
+
+# Note that you should run the category_controller tests first 
+# as items need a category_id for it to be added
+
+### ITEM CONTROLLER TESTS
+
+# Add item
 POST http://localhost:5000/api/items HTTP/1.1
 content-type: application/json
 
-// Test payload from a test POST request.
-{ "item_name": "Cheesedog", "price": 1000, "image": "/path/to/image" }
+{ "item_name": "Cheesedog", "price": 1000, "image_path": "/path/to/image", "category_id": 2 }
 
 ###
 
-// Get all items
+# Get all items
 GET http://localhost:5000/api/items HTTP/1.1
 content-type: application/json
 
 ###
 
-// Get specific item
+# Get specific item
 GET http://localhost:5000/api/items/1 HTTP/1.1
 content-type: application/json
 
 ###
 
-// Update specific item
+# Update specific item
 PATCH http://localhost:5000/api/items/1 HTTP/1.1
 content-type: application/json
 
-{ "item_name": "Hotdog lang", "price": 100, "image": "/path/to/images" }
+{
+  "item_name": "Hotdog lang",
+  "price": 100,
+  "image_path": "/path/to/images",
+  "category_id": 2
+}
 
 ###
 
-// Delete item
+# Delete item
 DELETE http://localhost:5000/api/items/1 HTTP/1.1
 content-type: application/json
 
 ###
 
+# Search items
+GET http://localhost:5000/api/items/search?q=Cheese HTTP/1.1
+content-type: application/json
+
+###
+
+# Get items by price range
+GET http://localhost:5000/api/items/price-range?min=50&max=2000 HTTP/1.1
+content-type: application/json
+
+###
+
+
+### CATEGORY CONTROLLER TESTS
+
+# Add category
+POST http://localhost:5000/api/categories HTTP/1.1
+content-type: application/json
+
+{
+  "category_name": "Snacks"
+}
+
+###
+
+# Add subcategory
+POST http://localhost:5000/api/categories HTTP/1.1
+content-type: application/json
+
+{
+  "category_name": "Hotdogs",
+  "parent_category_id": 1
+}
+
+###
+
+# Get all categories
+GET http://localhost:5000/api/categories HTTP/1.1
+content-type: application/json
+
+###
+
+# Get specific category
+GET http://localhost:5000/api/categories/1 HTTP/1.1
+content-type: application/json
+
+###
+
+# Update category
+PATCH http://localhost:5000/api/categories/1 HTTP/1.1
+content-type: application/json
+
+{
+  "category_name": "Sandwiches"
+}
+
+###
+
+# Delete category
+DELETE http://localhost:5000/api/categories/1 HTTP/1.1
+content-type: application/json
+
+###
+
+# Search categories
+GET http://localhost:5000/api/categories/search?q=Snack HTTP/1.1
+content-type: application/json
+
+###
+
+# Get subcategories of a category
+GET http://localhost:5000/api/categories/1/subcategories HTTP/1.1
+content-type: application/json

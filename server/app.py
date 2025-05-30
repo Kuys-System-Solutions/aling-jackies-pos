@@ -7,6 +7,7 @@ import json
 import logging
 import sys
 from controller.item_controller import item_bp
+from controller.category_controller import category_bp
 
 # Configure logging
 logging.basicConfig(
@@ -18,6 +19,7 @@ logger = logging.getLogger(__name__)
 
 app = Flask(__name__)
 app.register_blueprint(item_bp)
+app.register_blueprint(category_bp)
 
 """
 Each function here is an API endpoint.

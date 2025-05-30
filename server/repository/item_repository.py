@@ -17,7 +17,7 @@ class ItemRepository:
     def get_all_items(self, page=1, per_page=10):
         """
         Get all menu items with pagination
-        
+        a
         Args:
             page (int): The page number (starting at 1)
             per_page (int): Number of items per page
@@ -52,7 +52,8 @@ class ItemRepository:
                         "item_name": item[1],
                         "price": item[2],
                         "image_path": item[3],
-                        "created_at": item[4]
+                        "category_id": item[4],
+                        "created_at": item[5]
                     } for item in items
                 ]
                 
@@ -92,7 +93,8 @@ class ItemRepository:
                         "item_name": item[1],
                         "price": item[2],
                         "image_path": item[3],
-                        "created_at": item[4]
+                        "category_id": item[4],
+                        "created_at": item[5]
                     }
                 else:
                     return None
@@ -114,6 +116,7 @@ class ItemRepository:
             name = item_data.get('item_name')
             price = item_data.get('price')
             image = item_data.get('image_path')
+            category_id = item_data.get('category_id')
             created_at = datetime.now().strftime('%Y-%m-%d %H:%M:%S')
             
             logger.info(f"Repository: Creating new item '{name}' with price {price}")
@@ -121,8 +124,8 @@ class ItemRepository:
             with self._get_connection() as conn:
                 cursor = conn.cursor()
                 cursor.execute(
-                    "INSERT INTO items (item_name, price, image_path, created_at) VALUES (?, ?, ?, ?)",
-                    (name, price, image, created_at)
+                    "INSERT INTO items (item_name, price, image_path, category_id, created_at) VALUES (?, ?, ?, ?, ?)",
+                    (name, price, image, category_id, created_at)
                 )
                 conn.commit()
                 new_id = cursor.lastrowid
@@ -146,7 +149,7 @@ class ItemRepository:
         try:
             # Extract fields from the data
             fields = {key: value for key, value in item_data.items() 
-                     if key in ["item_name", "price", "image_path"] and value is not None}
+                     if key in ["item_name", "price", "image_path", "category_id"] and value is not None}
             
             if not fields:
                 return False  # Nothing to update
@@ -214,7 +217,8 @@ class ItemRepository:
                         "item_name": item[1],
                         "price": item[2],
                         "image_path": item[3],
-                        "created_at": item[4]
+                        "category_id": item[4],
+                        "created_at": item[5]
                     } for item in items
                 ]
         except Exception as e:
@@ -247,7 +251,8 @@ class ItemRepository:
                         "item_name": item[1],
                         "price": item[2],
                         "image_path": item[3],
-                        "created_at": item[4]
+                        "category_id": item[4],
+                        "created_at": item[5]
                     } for item in items
                 ]
         except Exception as e:
