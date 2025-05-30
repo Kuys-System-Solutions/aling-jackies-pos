@@ -10,6 +10,7 @@ import { useParams } from 'react-router';
 export default function POS() {
   const [orderType, setOrderType] = useState(''); // State to hold the order type
   const [orderItems, setOrderItems] = useState([]); // State to hold the orders
+  const [searchTerm, setSearchTerm] = useState(''); // State to hold the search term
   const params = useParams();
 
   // sets the order type based on the URL parameter
@@ -31,14 +32,23 @@ export default function POS() {
     alert(`You are in the interface for ${orderType} orders!`);
   }, [orderType]);
 
+  // Handler for search input changes
+  const handleSearch = (value) => {
+    setSearchTerm(value);
+  };
+
   // Function to handle item selection and add to order
   // TODO ?
 
   return (
     <div>
       <CategoryBar />
-      <Header />
-      <ItemView orderItems={orderItems} setOrderItems={setOrderItems} />
+      <Header onSearch={handleSearch} />
+      <ItemView 
+        orderItems={orderItems} 
+        setOrderItems={setOrderItems} 
+        searchTerm={searchTerm}
+      />
       <OrderList orderItems={orderItems} setOrderItems={setOrderItems} />
     </div>
   );
